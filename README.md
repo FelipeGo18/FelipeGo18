@@ -4,7 +4,7 @@
 
 <img src="./assets/tracklist.svg" width="100%" alt="Tracklist: AgroSense, LaboRemoto, Microservicios" />
 
-<a href="https://open.spotify.com/"><img src="https://sonando.vercel.app/api/now" width="100%" alt="Lo que estoy escuchando en Spotify" /></a>
+<a href="https://github.com/FelipeGo18/sonando"><img src="https://sonando.vercel.app/api/now" width="100%" alt="Lo que estoy escuchando en Spotify" /></a>
 
 <img src="./assets/racha.svg" width="100%" alt="Racha de contribuciones" />
 
@@ -26,11 +26,13 @@
 <br/>
 <img src="https://skillicons.dev/icons?i=vscode,visualstudio,netbeans,git,github,figma,postman,latex&theme=dark" alt="Herramientas" />
 
-Claude Code · Codex · Warp · Antigravity · Cisco Packet Tracer · k6 · FFmpeg · WSL
+Claude Code · Codex · Warp · Antigravity · k6 · FFmpeg · WSL
 
-### Booking
+### Redes sociales
 
-[LinkedIn](https://www.linkedin.com/in/andres-felipe-gonzalez-garzon-1623a128b/) · [Instagram](https://www.instagram.com/felipego_23/) · [GitHub](https://github.com/FelipeGo18)
+<a href="https://www.linkedin.com/in/andres-felipe-gonzalez-garzon-1623a128b/"><img src="https://skillicons.dev/icons?i=linkedin&theme=dark" alt="LinkedIn" /></a>
+<a href="https://www.instagram.com/felipego_23/"><img src="https://skillicons.dev/icons?i=instagram&theme=dark" alt="Instagram" /></a>
+<a href="https://github.com/FelipeGo18"><img src="https://skillicons.dev/icons?i=github&theme=dark" alt="GitHub" /></a>
 
 <br/>
 
