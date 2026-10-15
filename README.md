@@ -4,6 +4,8 @@
 
 <img src="./assets/tracklist.svg" width="100%" alt="Tracklist: AgroSense, LaboRemoto, Microservicios" />
 
+<a href="https://open.spotify.com/"><img src="https://sonando.vercel.app/api/now" width="100%" alt="Lo que estoy escuchando en Spotify" /></a>
+
 <img src="./assets/racha.svg" width="100%" alt="Racha de contribuciones" />
 
 <p align="center"><img src="./metrics.svg" alt="Métricas de GitHub" /></p>
