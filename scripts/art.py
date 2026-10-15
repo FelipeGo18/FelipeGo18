@@ -255,7 +255,7 @@ def hero():
             f'keyTimes="0;{bstart / D:.4f};{bend / D:.4f};{OUTT / D:.4f};1" dur="{D}s" repeatCount="indefinite"/>'
             f'</rect></clipPath>')
     l2, _, t2 = typed(anton, "GONZÁLEZ", s2, x0 + 8, y2, D, bend, 0.08, OUTT, tracking=2, fill=BLACK)
-    l3, w3, t3 = typed(monob, "INGENIERO DE SISTEMAS", s3, x0, y3, D, t2 + 0.25, 0.05, OUTT, tracking=3, fill=WHITE)
+    l3, w3, t3 = typed(monob, "DESARROLLADOR BACKEND", s3, x0, y3, D, t2 + 0.25, 0.05, OUTT, tracking=3, fill=WHITE)
 
     ch = monob.cap(s3)
     cursor = (f'<rect x="{x0 + w3 + 10:.1f}" y="{y3 - ch:.1f}" width="14" height="{ch:.1f}" fill="{RED}" opacity="0">'
@@ -306,7 +306,7 @@ def hero():
 {top_l}{top_r}
 {advisory}
 {progress}{t_a}{t_b}"""
-    svg = svg_doc(H, "Andrés Felipe González, ingeniero de sistemas", body, extra_defs=g1 + gc + wipe)
+    svg = svg_doc(H, "Andrés Felipe González, desarrollador backend", body, extra_defs=g1 + gc + wipe)
     open(os.path.join(OUT, "hero.svg"), "w", encoding="utf-8").write(svg)
 
 

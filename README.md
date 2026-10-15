@@ -1,4 +1,4 @@
-<img src="./assets/hero.svg" width="100%" alt="Andrés Felipe González — Ingeniero de sistemas" />
+<img src="./assets/hero.svg" width="100%" alt="Andrés Felipe González — Desarrollador backend" />
 
 <img src="./assets/notas.svg" width="100%" alt="Estudio ingeniería de sistemas (9.º semestre) y trabajo como desarrollador backend en CI2. Construyo soluciones de punta a punta y conecto software con hardware: Jetson, Raspberry Pi, Arduino, visión en el borde, RTSP, MQTT y SSH." />
 
