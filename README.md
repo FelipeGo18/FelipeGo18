@@ -6,6 +6,8 @@
 
 <img src="./assets/racha.svg" width="100%" alt="Racha de contribuciones" />
 
+<p align="center"><img src="./metrics.svg" alt="Métricas de GitHub" /></p>
+
 <img src="./profile-3d-contrib/profile-rhlm.svg" width="100%" alt="Contribuciones en 3D" />
 
 <img src="https://raw.githubusercontent.com/FelipeGo18/FelipeGo18/output/snake-rhlm.gif" width="100%" alt="Serpiente de contribuciones" />
