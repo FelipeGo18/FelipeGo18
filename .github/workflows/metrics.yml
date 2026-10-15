@@ -28,3 +28,9 @@ jobs:
           plugin_habits_charts: yes
           plugin_habits_days: 30
           plugin_habits_from: 200
+          extras_css: |
+            svg, #metrics, #metrics-end { background: #0a0a0a; }
+            * { color: #f5f5f5; fill: #f5f5f5; font-family: "Space Mono", ui-monospace, monospace; }
+            h2, h2 * { color: #e11d2e; fill: #e11d2e; text-transform: uppercase; letter-spacing: 2px; }
+            .field, .field * { color: #a3a3a3; fill: #a3a3a3; }
+            .bar, .commits.bar, .habits .bar { background: #e11d2e !important; }

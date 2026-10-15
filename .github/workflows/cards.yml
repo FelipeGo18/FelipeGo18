@@ -1,0 +1,40 @@
+name: Tarjetas
+
+on:
+  schedule:
+    - cron: "0 5 * * *" # medianoche en Colombia
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["scripts/**", "fonts/**"]
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install fonttools
+      - name: Generar arte y racha
+        working-directory: scripts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROFILE_USER: ${{ github.repository_owner }}
+        run: |
+          python art.py
+          python rhlm.py
+          python cards.py
+      - name: Commit & Push
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add assets
+          if git commit -m "tarjetas actualizadas"; then
+            git pull --rebase
+            git push
+          fi
