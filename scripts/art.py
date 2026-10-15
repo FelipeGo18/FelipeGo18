@@ -416,8 +416,77 @@ def tracklist():
         svg_doc(H, "Tracklist: " + ", ".join(t[0] for t in TRACKS), "".join(out), extra_defs=g))
 
 
+ARSENAL = [
+    ("LENGUAJES", [("openjdk", "Java"), ("kotlin", "Kotlin"), ("typescript", "TypeScript"), ("javascript", "JavaScript"),
+                   ("python", "Python"), ("rust", "Rust"), ("csharp", "C#"), ("php", "PHP"), ("gnubash", "Bash"),
+                   ("powershell", "PowerShell")]),
+    ("FRAMEWORKS", [("react", "React"), ("vite", "Vite"), ("tailwindcss", "Tailwind"), ("threedotjs", "Three.js"),
+                    ("gsap", "GSAP"), ("tauri", "Tauri"), ("fastapi", "FastAPI"), ("dotnet", ".NET"),
+                    ("nodedotjs", "Node.js"), ("bun", "Bun"), ("streamlit", "Streamlit")]),
+    ("DEVOPS Y DATOS", [("docker", "Docker"), ("kubernetes", "Kubernetes"), ("aws", "AWS"), ("githubactions", "Actions"),
+                        ("linux", "Linux"), ("kong", "Kong"), ("keycloak", "Keycloak"), ("natsdotio", "NATS"),
+                        ("postgresql", "Postgres"), ("mongodb", "MongoDB"), ("sqlite", "SQLite")]),
+    ("IOT", [("raspberrypi", "Raspberry Pi"), ("arduino", "Arduino")]),
+    ("HERRAMIENTAS", [("vscode", "VS Code"), ("visualstudio", "Visual Studio"), ("apachenetbeanside", "NetBeans"),
+                      ("git", "Git"), ("github", "GitHub"), ("figma", "Figma"), ("postman", "Postman"),
+                      ("warp", "Warp"), ("k6", "k6"), ("ffmpeg", "FFmpeg"), ("latex", "LaTeX")]),
+    ("IA", [("claude", "Claude Code"), ("openai", "Codex"), ("antigravity", "Antigravity"), ("grok", "Grok"),
+             ("modelcontextprotocol", "MCP")]),
+]
+
+
+def icon(slug, x, y, size, icons):
+    """Logo oficial repintado en plata, dentro de un svg anidado con su propio viewBox."""
+    ic = icons[slug]
+    paths = "".join(f'<path d="{p["d"]}"' + (f' fill-rule="{p["rule"]}"' if p["rule"] else "") + "/>"
+                    for p in ic["paths"])
+    return (f'<svg x="{x:.1f}" y="{y:.1f}" width="{size}" height="{size}" viewBox="{ic["viewBox"]}">'
+            f'<g fill="url(#chromeIcon)">{paths}</g></svg>')
+
+
+def arsenal():
+    import json
+
+    icons = json.load(open(os.path.join(OUT, "icons.json"), encoding="utf-8"))
+    x0, y_title = 70, 132
+    label_w, col, size, row = 210, 78, 40, 104
+    top = 190
+    H = top + row * len(ARSENAL) + 30
+    g, t, wt = title("Arsenal", y_title, H)
+    total = sum(len(items) for _, items in ARSENAL)
+    side, _ = mono.path("STACK", 15, x0 + wt + 26, y_title, RED, tracking=3)
+    rt = f"{total} PIEZAS"
+    right, _ = mono.path(rt, 15, W - x0 - mono.width(rt, 15, 3), y_title, DIM, tracking=3)
+    out = [t, side, right, f'<rect x="{x0}" y="{y_title + 22}" width="{W - 2 * x0}" height="2" fill="{RED}"/>']
+
+    for r, (cat, items) in enumerate(ARSENAL):
+        y = top + r * row
+        lab, _ = monob.path(cat, 13, x0, y + size / 2 + 5, RED, tracking=3)
+        num, _ = mono.path(f"{len(items):02d}", 12, x0, y + size / 2 + 26, DIM, tracking=2)
+        cells = []
+        for i, (slug, name) in enumerate(items):
+            cx = x0 + label_w + i * col + col / 2
+            nm = mono.width(name, 10.5)
+            lbl, _ = mono.path(name, 10.5, cx - nm / 2, y + size + 22, GRAY)
+            cells.append(icon(slug, cx - size / 2, y, size, icons) + lbl)
+        begin = 0.1 + r * 0.12
+        out.append(f'<g><animate attributeName="opacity" values="0;0;1" keyTimes="0;{begin / (begin + .4):.3f};1" '
+                   f'dur="{begin + .4:.2f}s" fill="freeze"/>{lab}{num}{"".join(cells)}</g>')
+        if r < len(ARSENAL) - 1:
+            out.append(f'<rect x="{x0}" y="{y + row - 18}" width="{W - 2 * x0}" height="1" fill="{LINE}"/>')
+
+    chrome_icon = """<linearGradient id="chromeIcon" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff"/><stop offset="0.45" stop-color="#bdbdbd"/>
+    <stop offset="0.5" stop-color="#6e6e6e"/><stop offset="0.55" stop-color="#e3e3e3"/>
+    <stop offset="1" stop-color="#9a9a9a"/></linearGradient>"""
+    label = "Arsenal: " + "; ".join(f"{c.lower()}: " + ", ".join(n for _, n in items) for c, items in ARSENAL)
+    open(os.path.join(OUT, "arsenal.svg"), "w", encoding="utf-8").write(
+        svg_doc(H, label, "".join(out), extra_defs=g + chrome_icon))
+
+
 if __name__ == "__main__":
     hero()
     notas()
     tracklist()
+    arsenal()
     print("ok")

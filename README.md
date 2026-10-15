@@ -14,19 +14,7 @@
 
 <img src="https://raw.githubusercontent.com/FelipeGo18/FelipeGo18/output/snake-rhlm.gif" width="100%" alt="Serpiente de contribuciones" />
 
-### Producido con
-
-<img src="https://skillicons.dev/icons?i=java,kotlin,ts,js,py,rust,cs,php,bash,powershell&theme=dark" alt="Lenguajes" />
-<br/>
-<img src="https://skillicons.dev/icons?i=react,vite,tailwind,threejs,tauri,html,css&theme=dark" alt="Frontend" />
-<br/>
-<img src="https://skillicons.dev/icons?i=fastapi,dotnet,nodejs,bun,postgres,mongodb,sqlite&theme=dark" alt="Backend y datos" />
-<br/>
-<img src="https://skillicons.dev/icons?i=docker,kubernetes,aws,githubactions,linux,raspberrypi,arduino&theme=dark" alt="Infra e IoT" />
-<br/>
-<img src="https://skillicons.dev/icons?i=vscode,visualstudio,netbeans,git,github,figma,postman,latex&theme=dark" alt="Herramientas" />
-
-Claude Code · Codex · Warp · Antigravity · k6 · FFmpeg · WSL
+<img src="./assets/arsenal.svg" width="100%" alt="Arsenal: lenguajes, frameworks, devops y datos, IoT, herramientas e IA" />
 
 ### Redes sociales
 
@@ -43,4 +31,4 @@ Claude Code · Codex · Warp · Antigravity · k6 · FFmpeg · WSL
   </picture>
 </p>
 
-<sub>Arte generado con código propio en <code>scripts/</code> · Anton, Space Mono y UnifrakturMaguntia bajo licencia OFL</sub>
+<sub>Arte generado con código propio en <code>scripts/</code> · Anton, Space Mono y UnifrakturMaguntia bajo licencia OFL · logos en <code>assets/ICONS-LICENSE.md</code></sub>

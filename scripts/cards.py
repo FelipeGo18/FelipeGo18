@@ -80,7 +80,7 @@ def card(days, today):
     out += [live, dot, right, f'<rect x="{x0}" y="{y_title + 22}" width="{W - 2 * x0}" height="2" fill="{RED}"/>']
 
     cols = [
-        (f"{total:,}".replace(",", "."), "CONTRIBUCIONES", "en total", None),
+        (f"{total:,}".replace(",", "."), "CONTRIBUCIONES", f"desde {next(iter(days)).year}" if days else "en total", None),
         (str(cur), "RACHA ACTUAL", f"{fecha(cs)} — {fecha(ce)}" if cur else "a empezar otra", RED),
         (str(lng), "RACHA MÁS LARGA", f"{fecha(ls)} — {fecha(le)}" if lng else "—", None),
     ]
