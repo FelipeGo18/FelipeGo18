@@ -5,7 +5,7 @@ import math
 import os
 import urllib.request
 
-from art import BLACK, DIM, GRAIN, GRAY, LINE, OUT, RED, WHITE, anton, mono, monob
+from art import DIM, GRAY, LINE, OUT, RED, W, anton, chrome_grad, chrome_text, mono, monob, svg_doc, title
 
 USER = os.environ.get("PROFILE_USER", "FelipeGo18")
 TOKEN = os.environ["GITHUB_TOKEN"]
@@ -69,46 +69,48 @@ def fecha(d):
 
 def card(days, today):
     total, (cur, cs, ce), (lng, ls, le) = streaks(days, today)
-    W, H = 1200, 470
-    x0 = 64
-    out = []
-
-    title, wt = anton.path("RACHA", 72, x0, 112, WHITE, tracking=2)
-    live, _ = mono.path("EN VIVO", 15, x0 + wt + 46, 112, RED, tracking=3)
-    dot = (f'<circle cx="{x0 + wt + 30}" cy="106" r="6" fill="{RED}">'
+    H, x0, y_title = 520, 70, 132
+    g, t, wt = title("Racha", y_title, H)
+    out = [t]
+    live, _ = mono.path("EN VIVO", 15, x0 + wt + 46, y_title, RED, tracking=3)
+    dot = (f'<circle cx="{x0 + wt + 30}" cy="{y_title - 6}" r="6" fill="{RED}">'
            f'<animate attributeName="opacity" values="1;0.2;1" dur="1.4s" repeatCount="indefinite"/></circle>')
     upd = f"ACTUALIZADO {fecha(today)}"
-    right, _ = mono.path(upd, 15, W - 64 - mono.width(upd, 15, 3), 112, DIM, tracking=3)
-    out += [title, live, dot, right, f'<rect x="{x0}" y="132" width="{W - 2 * x0}" height="2" fill="{RED}"/>']
+    right, _ = mono.path(upd, 15, W - x0 - mono.width(upd, 15, 3), y_title, DIM, tracking=3)
+    out += [live, dot, right, f'<rect x="{x0}" y="{y_title + 22}" width="{W - 2 * x0}" height="2" fill="{RED}"/>']
 
     cols = [
-        (f"{total:,}".replace(",", "."), "CONTRIBUCIONES", "en total", WHITE),
+        (f"{total:,}".replace(",", "."), "CONTRIBUCIONES", "en total", None),
         (str(cur), "RACHA ACTUAL", f"{fecha(cs)} — {fecha(ce)}" if cur else "a empezar otra", RED),
-        (str(lng), "RACHA MÁS LARGA", f"{fecha(ls)} — {fecha(le)}" if lng else "—", WHITE),
+        (str(lng), "RACHA MÁS LARGA", f"{fecha(ls)} — {fecha(le)}" if lng else "—", None),
     ]
     cw = (W - 2 * x0) / 3
+    ny = 300
+    defs = g + chrome_grad("chromeNum", ny - anton.cap(100) - 4, ny + 6)
     for i, (num, label, sub, color) in enumerate(cols):
-        cx = x0 + i * cw
-        n, wn = anton.path(num, 96, 0, 0, color, tracking=2)
+        mid = x0 + i * cw + cw / 2
+        wn = anton.width(num, 100, 2)
+        if color:
+            n, _ = anton.path(num, 100, mid - wn / 2, ny, color, tracking=2)
+        else:
+            n, _ = chrome_text(anton, num, 100, mid - wn / 2, ny, "chromeNum", tracking=2)
         lab, wl = monob.path(label, 14, 0, 0, GRAY, tracking=3)
         sb, ws = mono.path(sub, 12, 0, 0, DIM, tracking=1)
-        mid = cx + cw / 2
         delay = 0.15 + i * 0.15
         out.append(
             f'<g><animate attributeName="opacity" values="0;0;1" keyTimes="0;{delay / (delay + .4):.3f};1" '
-            f'dur="{delay + .4:.2f}s" fill="freeze"/>'
-            f'<g transform="translate({mid - wn / 2:.1f} 262)">{n}</g>'
-            f'<g transform="translate({mid - wl / 2:.1f} 294)">{lab}</g>'
-            f'<g transform="translate({mid - ws / 2:.1f} 316)">{sb}</g></g>'
+            f'dur="{delay + .4:.2f}s" fill="freeze"/>{n}'
+            f'<g transform="translate({mid - wl / 2:.1f} {ny + 34})">{lab}</g>'
+            f'<g transform="translate({mid - ws / 2:.1f} {ny + 56})">{sb}</g></g>'
         )
         if i:
-            out.append(f'<rect x="{cx:.1f}" y="170" width="1" height="150" fill="{LINE}"/>')
+            out.append(f'<rect x="{x0 + i * cw:.1f}" y="196" width="1" height="170" fill="{LINE}"/>')
 
     # forma de onda tipo mixtape con los últimos 365 días
     last = [today - dt.timedelta(days=k) for k in range(364, -1, -1)]
     vals = [days.get(d, 0) for d in last]
     peak = max(vals) or 1
-    wy, wh = 400, 34
+    wy, wh = 432, 30
     step = (W - 2 * x0) / len(vals)
     bars = []
     for k, v in enumerate(vals):
@@ -116,24 +118,18 @@ def card(days, today):
         bars.append(f'<rect x="{x0 + k * step:.1f}" y="{wy - h:.1f}" width="{max(step - 1, 1):.1f}" height="{2 * h:.1f}"/>')
     wave = "".join(bars)
     ww = W - 2 * x0
-    out.append(f'<g fill="#333333">{wave}</g>')
-    out.append(f'<clipPath id="played"><rect x="{x0}" y="{wy - wh - 4}" height="{2 * wh + 8}" width="{ww}">'
-               f'<animate attributeName="width" values="0;{ww};{ww}" keyTimes="0;0.85;1" dur="10s" repeatCount="indefinite"/>'
-               f'</rect></clipPath>')
+    out.append(f'<g fill="#3a3a3a">{wave}</g>')
+    defs += (f'<clipPath id="played"><rect x="{x0}" y="{wy - wh - 4}" height="{2 * wh + 8}" width="{ww}">'
+             f'<animate attributeName="width" values="0;{ww};{ww}" keyTimes="0;0.85;1" dur="10s" repeatCount="indefinite"/>'
+             f'</rect></clipPath>')
     out.append(f'<g fill="{RED}" clip-path="url(#played)">{wave}</g>')
     for k, d in enumerate(last):
         if d.day == 1:
-            m, _ = mono.path(MESES[d.month - 1], 11, x0 + k * step, wy + wh + 26, DIM, tracking=1)
+            m, _ = mono.path(MESES[d.month - 1], 11, x0 + k * step, wy + wh + 24, DIM, tracking=1)
             out.append(m)
 
-    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="Racha actual {cur} días, racha más larga {lng} días, {total} contribuciones">
-<defs>{GRAIN}</defs>
-<rect width="{W}" height="{H}" fill="{BLACK}"/>
-{chr(10).join(out)}
-<rect width="{W}" height="{H}" filter="url(#grain)" pointer-events="none"/>
-</svg>
-"""
-    open(os.path.join(OUT, "racha.svg"), "w", encoding="utf-8").write(svg)
+    label = f"Racha actual {cur} días, racha más larga {lng} días, {total} contribuciones"
+    open(os.path.join(OUT, "racha.svg"), "w", encoding="utf-8").write(svg_doc(H, label, "".join(out), extra_defs=defs))
     print(f"total={total} actual={cur} larga={lng}")
 
 

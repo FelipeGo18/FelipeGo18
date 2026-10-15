@@ -1,6 +1,6 @@
 <img src="./assets/hero.svg" width="100%" alt="Andrés Felipe González — Ingeniero de sistemas" />
 
-Construyo soluciones tecnológicas e integro sistemas. Me mueve crear cosas, automatizar lo que se repite y todo lo que conecte software con hardware, sobre todo el IoT.
+<img src="./assets/notas.svg" width="100%" alt="Soy ingeniero de sistemas y construyo soluciones de punta a punta: backend, infraestructura e interfaz. Disfruto sacar el software de la pantalla con Raspberry Pi, Arduino e IoT, y automatizo todo lo que se repite." />
 
 <img src="./assets/tracklist.svg" width="100%" alt="Tracklist: AgroSense, LaboRemoto, Microservicios" />
 
@@ -37,4 +37,4 @@ Claude Code · Codex · Warp · Antigravity · Cisco Packet Tracer · k6 · FFmp
   </picture>
 </p>
 
-<sub>Arte generado con código propio en <code>scripts/</code> · Anton y Space Mono bajo licencia OFL</sub>
+<sub>Arte generado con código propio en <code>scripts/</code> · Anton, Space Mono y UnifrakturMaguntia bajo licencia OFL</sub>
