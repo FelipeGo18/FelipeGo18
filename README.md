@@ -1,6 +1,6 @@
 <img src="./assets/hero.svg" width="100%" alt="Andrés Felipe González — Ingeniero de sistemas" />
 
-<img src="./assets/notas.svg" width="100%" alt="Soy ingeniero de sistemas y construyo soluciones de punta a punta: backend, infraestructura e interfaz. Disfruto sacar el software de la pantalla con Raspberry Pi, Arduino e IoT, y automatizo todo lo que se repite." />
+<img src="./assets/notas.svg" width="100%" alt="Estudio ingeniería de sistemas (9.º semestre) y trabajo como desarrollador backend en CI2. Construyo soluciones de punta a punta y conecto software con hardware: Jetson, Raspberry Pi, Arduino, visión en el borde, RTSP, MQTT y SSH." />
 
 <img src="./assets/tracklist.svg" width="100%" alt="Tracklist: AgroSense, LaboRemoto, Peaje Free Flow, Microservicios" />
 
