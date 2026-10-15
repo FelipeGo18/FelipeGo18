@@ -1,80 +1,67 @@
-<!-- Banner -->
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:7c3aed,100:bb9af7&height=220&section=header&text=Felipe%20Gonz%C3%A1lez&fontSize=56&fontColor=ffffff&fontAlignY=36&animation=fadeIn&desc=Developer%20%E2%80%A2%20Colombia&descAlignY=58&descSize=18" />
+<a href="https://github.com/FelipeGo18">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=26&duration=2800&pause=900&color=A78BFA&vCenter=true&width=620&height=50&lines=Andr%C3%A9s+Felipe+Gonz%C3%A1lez;Desarrollador+full+stack;Integraci%C3%B3n+de+sistemas+%C2%B7+IoT+%C2%B7+automatizaci%C3%B3n" alt="Andrés Felipe González" />
+</a>
 
-<p align="center">
-  <a href="https://github.com/FelipeGo18">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3000&pause=800&color=A78BFA&center=true&vCenter=true&width=600&lines=Hola!+Soy+Felipe+%F0%9F%91%8B;Desarrollador+Full+Stack;Java+%C2%B7+TypeScript+%C2%B7+Kotlin;Siempre+aprendiendo+algo+nuevo+%F0%9F%9A%80" alt="Typing SVG" />
-  </a>
-</p>
+Construyo soluciones tecnológicas e integro sistemas. Me mueve crear cosas, automatizar lo que se repite y todo lo que conecte software con hardware, sobre todo el IoT. Siempre hay algo nuevo por aprender.
 
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=FelipeGo18&label=Visitas&color=7c3aed&style=flat" />
-  <img src="https://img.shields.io/github/followers/FelipeGo18?label=Seguidores&style=flat&color=7c3aed&logo=github" />
-</p>
+Orgullosamente colombiano.
 
-## 🚀 Sobre mí
+### Ahora mismo
 
-- 💻 Construyo aplicaciones web y backend con **Java**, **TypeScript** y **Kotlin**
-- 🐳 Me gusta automatizar despliegues con **Docker** y scripts de **Shell**
-- 🌱 Siempre aprendiendo algo nuevo
-- ⚡ Dato curioso: ...
+- **AgroSense**: con el equipo RealE4Life, para el NASA Space Apps Challenge 2026. Una web que usa datos satelitales de la NASA para que los agricultores planeen la rotación de sus cultivos.
+- **LaboRemoto**: un laboratorio remoto para la Universidad Piloto de Colombia. Es una app de escritorio en Rust y Tauri desde la que se controlan Raspberry Pi, Arduino y robots, con terminal SSH, escritorio remoto e IA integrada.
+- Microservicios en .NET con Keycloak, Kong y Kubernetes en el trabajo.
 
-## 🛠️ Stack
+### Datos curiosos
 
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=java,kotlin,ts,js,python,html,css&perline=7" />
-  <br/>
-  <img src="https://skillicons.dev/icons?i=nodejs,docker,bash,git,github,linux,vscode&perline=7" />
-</p>
+- Monto topologías de red en Cisco Packet Tracer pidiéndoselas a una IA por MCP.
+- Tengo una herramienta propia que transcribe audio y video con Whisper.
+- Mi Windows está modificado con Windhawk. Si algo se puede personalizar, lo personalizo.
 
-## 🔥 Racha de contribuciones
+### Stack
+
+<img src="https://skillicons.dev/icons?i=java,kotlin,ts,js,py,rust,cs,php,bash,powershell&theme=dark" alt="Lenguajes" />
+<br/>
+<img src="https://skillicons.dev/icons?i=react,vite,tailwind,threejs,tauri,html,css&theme=dark" alt="Frontend" />
+<br/>
+<img src="https://skillicons.dev/icons?i=fastapi,dotnet,nodejs,bun,postgres,mongodb,sqlite&theme=dark" alt="Backend y datos" />
+<br/>
+<img src="https://skillicons.dev/icons?i=docker,kubernetes,aws,githubactions,linux,raspberrypi,arduino&theme=dark" alt="Infra e IoT" />
+
+### Herramientas
+
+<img src="https://skillicons.dev/icons?i=vscode,visualstudio,netbeans,git,github,figma,postman,latex&theme=dark" alt="Herramientas" />
+
+Claude Code · Codex · Warp · Antigravity · Cisco Packet Tracer · k6 · FFmpeg · WSL
+
+### Racha
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=FelipeGo18&hide_border=true&background=0D1117&ring=A78BFA&fire=A78BFA&currStreakLabel=A78BFA&currStreakNum=E6EDF3&sideNums=E6EDF3&sideLabels=8B949E&dates=8B949E&stroke=30363D&locale=es">
+  <img src="https://streak-stats.demolab.com?user=FelipeGo18&hide_border=true&background=FFFFFF&ring=7C3AED&fire=7C3AED&currStreakLabel=7C3AED&currStreakNum=1F2328&sideNums=1F2328&sideLabels=59636E&dates=59636E&stroke=D0D7DE&locale=es" alt="Racha de contribuciones" />
+</picture>
+
+### Contribuciones
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-rainbow.svg">
+  <img src="./profile-3d-contrib/profile-season-animate.svg" alt="Contribuciones en 3D" />
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/FelipeGo18/FelipeGo18/output/github-snake-dark.svg">
+  <img src="https://raw.githubusercontent.com/FelipeGo18/FelipeGo18/output/github-snake.svg" alt="Serpiente de contribuciones" />
+</picture>
+
+### Contacto
+
+[LinkedIn](https://www.linkedin.com/in/andres-felipe-gonzalez-garzon-1623a128b/) · [Instagram](https://www.instagram.com/felipego_23/) · [GitHub](https://github.com/FelipeGo18)
+
+<br/>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=FelipeGo18&theme=tokyonight&hide_border=true&ring=BB9AF7&fire=A78BFA&currStreakLabel=BB9AF7&background=1A1B27&locale=es">
-    <img src="https://streak-stats.demolab.com?user=FelipeGo18&hide_border=true&ring=7C3AED&fire=7C3AED&currStreakLabel=7C3AED&locale=es" alt="Racha de contribuciones" />
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/rhlm-dark.svg">
+    <img width="420" src="./assets/rhlm-light.svg" alt="Real Hasta La Muerte" />
   </picture>
 </p>
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-activity-graph.vercel.app/graph?username=FelipeGo18&theme=tokyo-night&hide_border=true&area=true&color=bb9af7&line=7c3aed&point=ffffff&bg_color=1a1b27">
-    <img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?username=FelipeGo18&hide_border=true&area=true&color=7c3aed&line=a78bfa&point=7c3aed&bg_color=ffffff" alt="Gráfica de actividad" />
-  </picture>
-</p>
-
-## 🏙️ Mis contribuciones en 3D
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./profile-3d-contrib/profile-night-rainbow.svg">
-    <img src="./profile-3d-contrib/profile-season-animate.svg" alt="Contribuciones 3D" />
-  </picture>
-</p>
-
-## 🐍 La serpiente
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/FelipeGo18/FelipeGo18/output/github-snake-dark.svg">
-    <img src="https://raw.githubusercontent.com/FelipeGo18/FelipeGo18/output/github-snake.svg" alt="Serpiente de contribuciones" />
-  </picture>
-</p>
-
-## 📫 Contacto
-
-<p align="center">
-  <a href="https://github.com/FelipeGo18"><img src="https://img.shields.io/badge/GitHub-FelipeGo18-7c3aed?style=for-the-badge&logo=github&logoColor=white" /></a>
-  <!-- Descomenta y pon tus enlaces:
-  <a href="https://linkedin.com/in/TU-USUARIO"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
-  <a href="mailto:TU-EMAIL"><img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" /></a>
-  -->
-</p>
-
-<!-- Real Hasta La Muerte -->
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=UnifrakturMaguntia&size=46&duration=4000&pause=2500&color=A78BFA&center=true&vCenter=true&width=700&height=80&lines=Real+Hasta+La+Muerte" alt="Real Hasta La Muerte" />
-</p>
-
-<!-- Footer -->
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:7c3aed,100:bb9af7&height=120&section=footer" />
