@@ -314,8 +314,9 @@ NOTAS = [
     "Soy ingeniero de sistemas y construyo soluciones de punta a punta: el backend, la infraestructura "
     "y la interfaz que termina usando la gente. Mi trabajo es que sistemas que no se conocen terminen "
     "hablando el mismo idioma.",
-    "Lo que más disfruto es sacar el software de la pantalla. Trabajo con Raspberry Pi, Arduino e IoT, "
-    "y si algo se repite, lo automatizo: despliegues, pruebas o un laboratorio remoto completo.",
+    "Lo que más disfruto es sacar el software de la pantalla: Jetson, Raspberry Pi y Arduino, modelos de "
+    "visión corriendo en el borde, cámaras por RTSP y todo conectado por MQTT o SSH. Si algo se repite, "
+    "lo automatizo: despliegues, pruebas o un laboratorio remoto completo.",
     "Al diseño le meto el mismo cuidado que al código. Animaciones, detalles y una estética propia, "
     "como la de este perfil.",
 ]
@@ -324,7 +325,7 @@ CREDITOS = [
     ("ROL", "Ingeniero de sistemas"),
     ("BASE", "Colombia"),
     ("ESPECIALIDAD", "Full stack · IoT · Integración"),
-    ("EN CURSO", "LaboRemoto · AgroSense"),
+    ("EN CURSO", "LaboRemoto · AgroSense · Peaje"),
     ("SELLO", "Real Hasta La Muerte"),
 ]
 
@@ -378,6 +379,7 @@ def notas():
 TRACKS = [
     ("AGROSENSE", "feat. NASA", "Space Apps 2026 con RealE4Life. Rotación de cultivos con datos satelitales.", "PYTHON · FASTAPI · REACT"),
     ("LABOREMOTO", "feat. Raspberry Pi", "Laboratorio remoto para la Universidad Piloto. SSH, VNC e IA.", "RUST · TAURI"),
+    ("PEAJE FREE FLOW", "feat. NVIDIA Jetson", "Peaje sin barreras: YOLO y OCR de placas en el borde, RFID y MQTT a AWS IoT.", "PYTHON · .NET · IOT"),
     ("MICROSERVICIOS", "feat. Kubernetes", "Lo que suena en el trabajo. Keycloak, Kong y NATS.", ".NET · K8S"),
 ]
 
@@ -424,15 +426,34 @@ ARSENAL = [
                     ("gsap", "GSAP"), ("tauri", "Tauri"), ("fastapi", "FastAPI"), ("dotnet", ".NET"),
                     ("nodedotjs", "Node.js"), ("bun", "Bun"), ("streamlit", "Streamlit")]),
     ("DEVOPS Y DATOS", [("docker", "Docker"), ("kubernetes", "Kubernetes"), ("aws", "AWS"), ("githubactions", "Actions"),
-                        ("linux", "Linux"), ("kong", "Kong"), ("keycloak", "Keycloak"), ("natsdotio", "NATS"),
-                        ("postgresql", "Postgres"), ("mongodb", "MongoDB"), ("sqlite", "SQLite")]),
-    ("IOT", [("raspberrypi", "Raspberry Pi"), ("arduino", "Arduino")]),
+                        ("linux", "Linux"), ("kong", "Kong"), ("keycloak", "Keycloak"), ("postgresql", "Postgres"),
+                        ("mongodb", "MongoDB"), ("sqlite", "SQLite"), ("supabase", "Supabase")]),
+    ("IOT Y EDGE", [("nvidia", "Jetson"), ("raspberrypi", "Raspberry Pi"), ("arduino", "Arduino"),
+                    ("eclipsemosquitto", "Mosquitto"), ("mqtt", "MQTT"), ("webrtc", "WebRTC"),
+                    ("cloudflare", "Cloudflared"), ("ffmpeg", "FFmpeg")]),
+    ("VISIÓN E IA LOCAL", [("ultralytics", "YOLO"), ("opencv", "OpenCV"), ("pytorch", "PyTorch"),
+                           ("openai", "Whisper"), ("mediapipe", "MediaPipe")]),
+    ("PROTOCOLOS", "tags", ["RTSP", "SSH", "SFTP", "SMTP", "VNC", "WebSocket", "REST", "RFID",
+                            "TLS", "GPIO"]),
     ("HERRAMIENTAS", [("vscode", "VS Code"), ("visualstudio", "Visual Studio"), ("apachenetbeanside", "NetBeans"),
                       ("git", "Git"), ("github", "GitHub"), ("figma", "Figma"), ("postman", "Postman"),
-                      ("warp", "Warp"), ("k6", "k6"), ("ffmpeg", "FFmpeg"), ("latex", "LaTeX")]),
+                      ("warp", "Warp"), ("k6", "k6"), ("vercel", "Vercel"), ("latex", "LaTeX")]),
     ("IA", [("claude", "Claude Code"), ("openai", "Codex"), ("antigravity", "Antigravity"), ("grok", "Grok"),
-             ("modelcontextprotocol", "MCP")]),
+            ("modelcontextprotocol", "MCP")]),
 ]
+
+
+def dog_tag(text, x, y):
+    """Placa de plata grabada (dog tag) para lo que no tiene logo, como los protocolos."""
+    tw = monob.width(text, 12, 2)
+    w, h = tw + 38, 30
+    t_dark, _ = monob.path(text, 12, x + 27, y + 20, "#151515", tracking=2)
+    t_light, _ = monob.path(text, 12, x + 27, y + 21, "#ffffff", tracking=2, extra='opacity="0.5"')
+    return (f'<rect x="{x + 2}" y="{y + 3}" width="{w}" height="{h}" rx="9" fill="#000" opacity="0.6"/>'
+            f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="9" fill="url(#chromeIcon)" stroke="#fff" stroke-opacity="0.35"/>'
+            f'<rect x="{x + 4}" y="{y + 4}" width="{w - 8}" height="{h - 8}" rx="6" fill="none" stroke="#000" stroke-opacity="0.25"/>'
+            f'<circle cx="{x + 14}" cy="{y + h / 2}" r="4" fill="#0a0a0a" stroke="#fff" stroke-opacity="0.4"/>'
+            f'{t_light}{t_dark}'), w
 
 
 def icon(slug, x, y, size, icons):
@@ -451,35 +472,52 @@ def arsenal():
     x0, y_title = 70, 132
     label_w, col, size, row = 210, 78, 40, 104
     top = 190
-    H = top + row * len(ARSENAL) + 30
-    g, t, wt = title("Arsenal", y_title, H)
-    total = sum(len(items) for _, items in ARSENAL)
+    g, t, wt = title("Arsenal", y_title, 0)
+    total = sum(len(e[-1]) for e in ARSENAL)
     side, _ = mono.path("STACK", 15, x0 + wt + 26, y_title, RED, tracking=3)
     rt = f"{total} PIEZAS"
     right, _ = mono.path(rt, 15, W - x0 - mono.width(rt, 15, 3), y_title, DIM, tracking=3)
     out = [t, side, right, f'<rect x="{x0}" y="{y_title + 22}" width="{W - 2 * x0}" height="2" fill="{RED}"/>']
 
-    for r, (cat, items) in enumerate(ARSENAL):
-        y = top + r * row
+    y = top
+    for r, entry in enumerate(ARSENAL):
+        cat = entry[0]
+        if entry[1] == "tags":
+            tags = entry[2]
+            cells, tx, ty = [], x0 + label_w, y + 4
+            for tag in tags:
+                piece, w = dog_tag(tag, tx, ty)
+                if tx + w > W - x0:
+                    tx, ty = x0 + label_w, ty + 44
+                    piece, w = dog_tag(tag, tx, ty)
+                cells.append(piece)
+                tx += w + 9
+            h_row, count = ty - y + 30 + 34, len(tags)
+        else:
+            items = entry[1]
+            cells = []
+            for i, (slug, name) in enumerate(items):
+                cx = x0 + label_w + i * col + col / 2
+                nm = mono.width(name, 10.5)
+                lbl, _ = mono.path(name, 10.5, cx - nm / 2, y + size + 22, GRAY)
+                cells.append(icon(slug, cx - size / 2, y, size, icons) + lbl)
+            h_row, count = row, len(items)
         lab, _ = monob.path(cat, 13, x0, y + size / 2 + 5, RED, tracking=3)
-        num, _ = mono.path(f"{len(items):02d}", 12, x0, y + size / 2 + 26, DIM, tracking=2)
-        cells = []
-        for i, (slug, name) in enumerate(items):
-            cx = x0 + label_w + i * col + col / 2
-            nm = mono.width(name, 10.5)
-            lbl, _ = mono.path(name, 10.5, cx - nm / 2, y + size + 22, GRAY)
-            cells.append(icon(slug, cx - size / 2, y, size, icons) + lbl)
+        num, _ = mono.path(f"{count:02d}", 12, x0, y + size / 2 + 26, DIM, tracking=2)
         begin = 0.1 + r * 0.12
         out.append(f'<g><animate attributeName="opacity" values="0;0;1" keyTimes="0;{begin / (begin + .4):.3f};1" '
                    f'dur="{begin + .4:.2f}s" fill="freeze"/>{lab}{num}{"".join(cells)}</g>')
+        y += h_row
         if r < len(ARSENAL) - 1:
-            out.append(f'<rect x="{x0}" y="{y + row - 18}" width="{W - 2 * x0}" height="1" fill="{LINE}"/>')
+            out.append(f'<rect x="{x0}" y="{y - 18}" width="{W - 2 * x0}" height="1" fill="{LINE}"/>')
+    H = y + 30
 
     chrome_icon = """<linearGradient id="chromeIcon" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0" stop-color="#ffffff"/><stop offset="0.45" stop-color="#bdbdbd"/>
     <stop offset="0.5" stop-color="#6e6e6e"/><stop offset="0.55" stop-color="#e3e3e3"/>
     <stop offset="1" stop-color="#9a9a9a"/></linearGradient>"""
-    label = "Arsenal: " + "; ".join(f"{c.lower()}: " + ", ".join(n for _, n in items) for c, items in ARSENAL)
+    label = "Arsenal: " + "; ".join(
+        f"{e[0].lower()}: " + ", ".join(i if isinstance(i, str) else i[1] for i in e[-1]) for e in ARSENAL)
     open(os.path.join(OUT, "arsenal.svg"), "w", encoding="utf-8").write(
         svg_doc(H, label, "".join(out), extra_defs=g + chrome_icon))
 
