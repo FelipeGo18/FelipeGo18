@@ -8,6 +8,10 @@ on:
     branches: [main]
     paths: ["scripts/**", "fonts/**"]
 
+concurrency:
+  group: escribe-main
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
