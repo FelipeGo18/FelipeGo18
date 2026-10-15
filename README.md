@@ -4,6 +4,8 @@
 
 <img src="./assets/tracklist.svg" width="100%" alt="Tracklist: AgroSense, LaboRemoto, Peaje Free Flow, Microservicios" />
 
+<a href="https://www.ci2.co/"><img src="./assets/trabajo.svg" width="100%" alt="Actualmente: desarrollador backend en CI2" /></a>
+
 <a href="https://github.com/FelipeGo18/sonando"><img src="https://sonando.vercel.app/api/now" width="100%" alt="Lo que estoy escuchando en Spotify" /></a>
 
 <img src="./assets/racha.svg" width="100%" alt="Racha de contribuciones" />
@@ -14,9 +16,9 @@
 
 ### Redes sociales
 
-<a href="https://www.linkedin.com/in/andres-felipe-gonzalez-garzon-1623a128b/"><img src="https://skillicons.dev/icons?i=linkedin&theme=dark" alt="LinkedIn" /></a>
-<a href="https://www.instagram.com/felipego_23/"><img src="https://skillicons.dev/icons?i=instagram&theme=dark" alt="Instagram" /></a>
-<a href="https://github.com/FelipeGo18"><img src="https://skillicons.dev/icons?i=github&theme=dark" alt="GitHub" /></a>
+<a href="https://www.linkedin.com/in/andres-felipe-gonzalez-garzon-1623a128b/"><img src="./assets/red-linkedin.svg" width="32%" alt="LinkedIn: Andrés Felipe González" /></a>
+<a href="https://www.instagram.com/felipego_23/"><img src="./assets/red-instagram.svg" width="32%" alt="Instagram: @felipego_23" /></a>
+<a href="https://github.com/FelipeGo18"><img src="./assets/red-github.svg" width="32%" alt="GitHub: FelipeGo18" /></a>
 
 <br/>
 

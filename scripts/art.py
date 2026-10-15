@@ -311,9 +311,9 @@ def hero():
 
 
 NOTAS = [
-    "Soy ingeniero de sistemas y construyo soluciones de punta a punta: el backend, la infraestructura "
-    "y la interfaz que termina usando la gente. Mi trabajo es que sistemas que no se conocen terminen "
-    "hablando el mismo idioma.",
+    "Estudio ingeniería de sistemas, voy en noveno semestre, y trabajo como desarrollador backend en CI2. "
+    "Construyo soluciones de punta a punta: el backend, la infraestructura y la interfaz que termina "
+    "usando la gente. Mi trabajo es que sistemas que no se conocen terminen hablando el mismo idioma.",
     "Lo que más disfruto es sacar el software de la pantalla: Jetson, Raspberry Pi y Arduino, modelos de "
     "visión corriendo en el borde, cámaras por RTSP y todo conectado por MQTT o SSH. Si algo se repite, "
     "lo automatizo: despliegues, pruebas o un laboratorio remoto completo.",
@@ -322,7 +322,8 @@ NOTAS = [
 ]
 
 CREDITOS = [
-    ("ROL", "Ingeniero de sistemas"),
+    ("ROL", "Desarrollador backend · CI2"),
+    ("FORMACIÓN", "Ing. de sistemas · 9.º semestre"),
     ("BASE", "Colombia"),
     ("ESPECIALIDAD", "Full stack · IoT · Integración"),
     ("EN CURSO", "LaboRemoto · AgroSense · Peaje"),
@@ -354,7 +355,7 @@ def notas():
             text.append(t)
             y += lh
         y += 16
-    H = max(y + 40, 520)
+    H = max(y + 40, 248 + 66 * len(CREDITOS) + 10)
 
     cx = x0 + col_w + 60
     cred = [f'<rect x="{cx - 30}" y="176" width="1" height="{H - 236}" fill="{LINE}"/>']
@@ -380,7 +381,7 @@ TRACKS = [
     ("AGROSENSE", "feat. NASA", "Space Apps 2026 con RealE4Life. Rotación de cultivos con datos satelitales.", "PYTHON · FASTAPI · REACT"),
     ("LABOREMOTO", "feat. Raspberry Pi", "Laboratorio remoto para la Universidad Piloto. SSH, VNC e IA.", "RUST · TAURI"),
     ("PEAJE FREE FLOW", "feat. NVIDIA Jetson", "Peaje sin barreras: YOLO y OCR de placas en el borde, RFID y MQTT a AWS IoT.", "PYTHON · .NET · IOT"),
-    ("MICROSERVICIOS", "feat. Kubernetes", "Lo que suena en el trabajo. Keycloak, Kong y NATS.", ".NET · K8S"),
+    ("MICROSERVICIOS", "feat. Kubernetes", "Lo que suena en CI2: backend en .NET con Keycloak, Kong y NATS.", ".NET · K8S"),
 ]
 
 
@@ -522,9 +523,72 @@ def arsenal():
         svg_doc(H, label, "".join(out), extra_defs=g + chrome_icon))
 
 
+REDES = [
+    ("linkedin", "LINKEDIN", "Andrés Felipe González"),
+    ("instagram", "INSTAGRAM", "@felipego_23"),
+    ("github", "GITHUB", "FelipeGo18"),
+]
+
+
+def small_doc(w, h, label, body, extra_defs=""):
+    """Pieza chica (placa) con el mismo cuero, grano y marco cromado que las tarjetas grandes."""
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" aria-label="{label}">
+<defs>
+  <filter id="grain" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+    <feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.07 0"/>
+  </filter>
+  {chrome_grad("chromeFrame", 0, h)}
+  <linearGradient id="chromeIcon" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff"/><stop offset="0.45" stop-color="#bdbdbd"/>
+    <stop offset="0.5" stop-color="#6e6e6e"/><stop offset="0.55" stop-color="#e3e3e3"/>
+    <stop offset="1" stop-color="#9a9a9a"/></linearGradient>
+  {extra_defs}
+</defs>
+<rect width="{w}" height="{h}" fill="{BLACK}"/>
+<rect x="6" y="6" width="{w - 12}" height="{h - 12}" fill="none" stroke="url(#chromeFrame)" stroke-width="2"/>
+<rect x="12" y="12" width="{w - 24}" height="{h - 24}" fill="none" stroke="#3a3a3a" stroke-width="1"/>
+{body}
+<rect width="{w}" height="{h}" filter="url(#grain)" pointer-events="none"/>
+</svg>
+"""
+
+
+def redes():
+    import json
+
+    icons = json.load(open(os.path.join(OUT, "icons.json"), encoding="utf-8"))
+    w, h = 400, 120
+    for slug, red, handle in REDES:
+        lab, _ = monob.path(red, 12, 104, 50, RED, tracking=4)
+        val, _ = mono.path(handle, 17 if mono.width(handle, 17) < 270 else 14, 104, 80, WHITE)
+        body = icon(slug, 34, 34, 52, icons) + lab + val
+        open(os.path.join(OUT, f"red-{slug}.svg"), "w", encoding="utf-8").write(
+            small_doc(w, h, f"{red.title()}: {handle}", body))
+
+
+def trabajo():
+    w, h = 1200, 110
+    lab, wl = monob.path("ACTUALMENTE", 13, 70, 62, RED, tracking=4)
+    g = chrome_grad("chromeJob", 30, 80)
+    job, wj = chrome_text(anton, "DESARROLLADOR BACKEND EN CI2", 38, 70 + wl + 30, 72, "chromeJob", tracking=1)
+    link = "CI2.CO  →"
+    lk, _ = mono.path(link, 15, w - 70 - mono.width(link, 15, 3), 64, GRAY, tracking=3)
+    shine = f"""<linearGradient id="shine" gradientUnits="userSpaceOnUse" x1="-420" y1="0" x2="-180" y2="{h}">
+    <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.95"/>
+    <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    <animateTransform attributeName="gradientTransform" type="translate" values="0 0;{w + 700} 0;{w + 700} 0"
+      keyTimes="0;0.4;1" dur="6s" repeatCount="indefinite"/></linearGradient>"""
+    body = lab + job + lk + cross(70 + wl + 30 + wj + 34, 56, 12, "chromeFrame", gem=True, long_bottom=False)
+    open(os.path.join(OUT, "trabajo.svg"), "w", encoding="utf-8").write(
+        small_doc(w, h, "Actualmente: desarrollador backend en CI2", body, extra_defs=g + shine))
+
+
 if __name__ == "__main__":
     hero()
     notas()
     tracklist()
     arsenal()
+    redes()
+    trabajo()
     print("ok")
