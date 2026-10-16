@@ -8,7 +8,7 @@
 
 <a href="https://github.com/FelipeGo18/sonando"><img src="https://sonando.vercel.app/api/now" width="100%" alt="Lo que estoy escuchando en Spotify" /></a>
 
-<img src="./assets/racha.svg" width="100%" alt="Racha de contribuciones" />
+<img src="https://racha-felipego18.vercel.app/api/racha" width="100%" alt="Racha de contribuciones en vivo" />
 
 <img src="https://raw.githubusercontent.com/FelipeGo18/FelipeGo18/output/snake-rhlm.gif" width="100%" alt="Serpiente de contribuciones" />
 
