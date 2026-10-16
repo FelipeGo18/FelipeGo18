@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/racha.py": {
+      "includeFiles": "{scripts,fonts,assets}/**",
+      "maxDuration": 15
+    }
+  },
+  "git": {
+    "deploymentEnabled": {
+      "output": false
+    }
+  }
+}

@@ -1,0 +1,8 @@
+[project]
+name = "felipego18-perfil"
+version = "1.0.0"
+requires-python = ">=3.12"
+dependencies = ["fonttools>=4.50"]
+
+[tool.vercel]
+entrypoint = "api.racha:handler"

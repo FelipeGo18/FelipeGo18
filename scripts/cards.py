@@ -1,4 +1,7 @@
-"""Tarjeta de racha propia: consulta las contribuciones por GraphQL y dibuja assets/racha.svg."""
+"""Tarjeta de racha propia: consulta las contribuciones por GraphQL y dibuja la racha.
+
+La usa api/racha.py para servirla en vivo, y la Action la guarda en assets/racha.svg como respaldo.
+"""
 import datetime as dt
 import json
 import math
@@ -8,7 +11,6 @@ import urllib.request
 from art import DIM, GRAY, LINE, OUT, RED, W, anton, chrome_grad, chrome_text, mono, monob, svg_doc, title
 
 USER = os.environ.get("PROFILE_USER", "FelipeGo18")
-TOKEN = os.environ["GITHUB_TOKEN"]
 TZ = dt.timezone(dt.timedelta(hours=-5))  # Colombia
 MESES = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"]
 
@@ -17,12 +19,12 @@ def gql(query, **variables):
     req = urllib.request.Request(
         "https://api.github.com/graphql",
         data=json.dumps({"query": query, "variables": variables}).encode(),
-        headers={"Authorization": f"bearer {TOKEN}", "Content-Type": "application/json"},
+        headers={"Authorization": f"bearer {os.environ['GITHUB_TOKEN']}", "Content-Type": "application/json"},
     )
-    with urllib.request.urlopen(req, timeout=30) as r:
+    with urllib.request.urlopen(req, timeout=15) as r:
         body = json.load(r)
     if "errors" in body:
-        raise SystemExit(body["errors"])
+        raise RuntimeError(body["errors"])
     return body["data"]
 
 
@@ -67,7 +69,7 @@ def fecha(d):
     return f"{d.day} {MESES[d.month - 1]} {d.year}" if d else "—"
 
 
-def card(days, today):
+def render(days, today):
     total, (cur, cs, ce), (lng, ls, le) = streaks(days, today)
     H, x0, y_title = 520, 70, 132
     g, t, wt = title("Racha", y_title, H)
@@ -75,7 +77,7 @@ def card(days, today):
     live, _ = mono.path("EN VIVO", 15, x0 + wt + 46, y_title, RED, tracking=3)
     dot = (f'<circle cx="{x0 + wt + 30}" cy="{y_title - 6}" r="6" fill="{RED}">'
            f'<animate attributeName="opacity" values="1;0.2;1" dur="1.4s" repeatCount="indefinite"/></circle>')
-    upd = f"ACTUALIZADO {fecha(today)}"
+    upd = f"ACTUALIZADO {fecha(today)} · {dt.datetime.now(TZ):%H:%M}"
     right, _ = mono.path(upd, 15, W - x0 - mono.width(upd, 15, 3), y_title, DIM, tracking=3)
     out += [live, dot, right, f'<rect x="{x0}" y="{y_title + 22}" width="{W - 2 * x0}" height="2" fill="{RED}"/>']
 
@@ -129,9 +131,10 @@ def card(days, today):
             out.append(m)
 
     label = f"Racha actual {cur} días, racha más larga {lng} días, {total} contribuciones"
-    open(os.path.join(OUT, "racha.svg"), "w", encoding="utf-8").write(svg_doc(H, label, "".join(out), extra_defs=defs))
-    print(f"total={total} actual={cur} larga={lng}")
+    return svg_doc(H, label, "".join(out), extra_defs=defs)
 
 
 if __name__ == "__main__":
-    card(*contributions())
+    svg = render(*contributions())
+    open(os.path.join(OUT, "racha.svg"), "w", encoding="utf-8").write(svg)
+    print("racha.svg actualizado")
