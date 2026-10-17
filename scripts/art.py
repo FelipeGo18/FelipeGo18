@@ -523,6 +523,101 @@ def arsenal():
         svg_doc(H, label, "".join(out), extra_defs=g + chrome_icon))
 
 
+DISCOGRAFIA = [
+    ("2022", "EL INICIO", "2022 — 2023", [
+        "Empieza Ingeniería de Sistemas en la Universidad Piloto (2022-2)",
+        "Primera cuenta en GitHub",
+    ]),
+    ("2024", "ESTRUCTURAS", "2024", [
+        "Estructuras de datos, sockets y chat cliente-servidor en Java",
+        "Certificado: Patrones de Diseño de Software",
+    ]),
+    ("2025", "SEMILLERO", "2025", [
+        "Entra al semillero de investigación (marzo)",
+        "Del cliente SSH en terminal al cliente de escritorio en Rust",
+        "Informe de investigación del Laboratorio Remoto (julio)",
+        "Certificado: Conceptualización y Diseño en Ingeniería",
+    ]),
+    ("2026", "EN VIVO", "2026", [
+        "Peaje Free Flow: visión en el borde con Jetson",
+        "Desarrollador backend en CI2 (mayo)",
+        "Certificados: Internet de las Cosas · Gestión de Proyectos TIC",
+        "NASA Space Apps Challenge con RealE4Life",
+        "Tesis: el cliente de LaboRemoto · paper del semillero en escritura",
+    ]),
+    ("2027", "GRADO", "2027", [
+        "Ingeniero de Sistemas (mitad de año)",
+    ]),
+]
+
+
+def album_cover(x, y, s, year, vol, state):
+    """Portada de cada volumen: cuero, marco de plata y el año en cromo. state: pasado, actual o proximo."""
+    out = []
+    if state == "proximo":
+        out.append(f'<rect x="{x}" y="{y}" width="{s}" height="{s}" fill="#0f0f0f" stroke="#555" '
+                   f'stroke-width="2" stroke-dasharray="6 6"/>')
+        yr, wy = anton.path(year, 44, 0, 0, "#4a4a4a", tracking=1)
+        out.append(f'<g transform="translate({x + (s - wy) / 2:.1f} {y + s / 2 + 18:.1f})">{yr}</g>')
+        tag, wt = monob.path("PRÓXIMO", 10, 0, 0, RED, tracking=3)
+        out.append(f'<g transform="translate({x + (s - wt) / 2:.1f} {y + s - 14})"><animate attributeName="opacity" '
+                   f'values="1;0.25;1" dur="2s" repeatCount="indefinite"/>{tag}</g>')
+        return "".join(out)
+    out.append(f'<rect x="{x + 4}" y="{y + 6}" width="{s}" height="{s}" fill="#000" opacity="0.6"/>')
+    out.append(f'<rect x="{x}" y="{y}" width="{s}" height="{s}" fill="#141414" stroke="url(#chromeFrame)" stroke-width="2"/>')
+    out.append(f'<rect x="{x + 6}" y="{y + 6}" width="{s - 12}" height="{s - 12}" fill="none" stroke="#2e2e2e"/>')
+    v, _ = monob.path(f"VOL. {vol:02d}", 10, x + 12, y + 22, RED, tracking=3)
+    out.append(v)
+    wy = anton.width(year, 46, 1)
+    yr, _ = chrome_text(anton, year, 46, x + (s - wy) / 2, y + s / 2 + 22, "chromeYear", tracking=1)
+    out.append(yr)
+    out.append(cross(x + s - 18, y + s - 22, 8, "chromeFrame", gem=state == "actual", long_bottom=True))
+    if state == "actual":
+        tag, wt = monob.path("EN CURSO", 9, 0, 0, RED, tracking=3)
+        out.append(f'<g transform="translate({x + 12} {y + s - 14})"><animate attributeName="opacity" '
+                   f'values="1;0.3;1" dur="1.6s" repeatCount="indefinite"/>{tag}</g>')
+    return "".join(out)
+
+
+def discografia():
+    x0, y_title = 70, 132
+    cs, gap = 132, 44
+    tx = x0 + cs + 40
+    y = 190
+    rows = []
+    last = len(DISCOGRAFIA) - 1
+    for i, (year, name, span, tracks) in enumerate(DISCOGRAFIA):
+        state = "proximo" if i == last else ("actual" if i == last - 1 else "pasado")
+        row = [album_cover(x0, y, cs, year, i + 1, state)]
+        nm, wn = anton.path(name, 38, tx, y + 36, WHITE if state != "proximo" else "#7a7a7a", tracking=1)
+        sp, _ = mono.path(span, 13, tx + wn + 18, y + 34, GRAY, tracking=2)
+        row += [nm, sp]
+        ty = y + 70
+        for k, track in enumerate(tracks):
+            num, _ = monob.path(f"{k + 1:02d}", 12, tx, ty, RED, tracking=1)
+            tt, _ = mono.path(track, 15, tx + 36, ty, "#d4d4d4" if state != "proximo" else DIM)
+            row += [num, tt]
+            ty += 26
+        h = max(cs, ty - y - 8)
+        begin = 0.1 + i * 0.14
+        rows.append(f'<g><animate attributeName="opacity" values="0;0;1" keyTimes="0;{begin / (begin + .4):.3f};1" '
+                    f'dur="{begin + .4:.2f}s" fill="freeze"/>{"".join(row)}</g>')
+        y += h + gap
+        if i < last:
+            rows.append(f'<rect x="{x0}" y="{y - gap / 2:.0f}" width="{W - 2 * x0}" height="1" fill="{LINE}"/>')
+    H = y + 10
+
+    g, t, wt = title("Discografía", y_title, H)
+    side, _ = mono.path("TRAYECTORIA", 15, x0 + wt + 26, y_title, RED, tracking=3)
+    rt = f"VOL. 01 — VOL. {len(DISCOGRAFIA):02d}"
+    right, _ = mono.path(rt, 15, W - x0 - mono.width(rt, 15, 3), y_title, DIM, tracking=3)
+    head = [t, side, right, f'<rect x="{x0}" y="{y_title + 22}" width="{W - 2 * x0}" height="2" fill="{RED}"/>']
+    label = "Discografía: " + "; ".join(f"{span} {n.title()}: " + ", ".join(tr) for _, n, span, tr in DISCOGRAFIA)
+    open(os.path.join(OUT, "discografia.svg"), "w", encoding="utf-8").write(
+        svg_doc(H, label, "".join(head + rows), extra_defs=g + chrome_grad("chromeYear", 0, 1).replace(
+            'gradientUnits="userSpaceOnUse" x1="0" y1="0.0" x2="0" y2="1.0"', 'x1="0" y1="0" x2="0" y2="1"')))
+
+
 REDES = [
     ("linkedin", "LINKEDIN", "Andrés Felipe González"),
     ("instagram", "INSTAGRAM", "@felipego_23"),
@@ -589,6 +684,7 @@ if __name__ == "__main__":
     notas()
     tracklist()
     arsenal()
+    discografia()
     redes()
     trabajo()
     print("ok")
