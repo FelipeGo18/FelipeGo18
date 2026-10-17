@@ -526,7 +526,7 @@ def arsenal():
 DISCOGRAFIA = [
     ("2022", "EL INICIO", "2022 — 2023", [
         "Empieza Ingeniería de Sistemas en la Universidad Piloto (2022-2)",
-        "Primera cuenta en GitHub",
+        "Abre su cuenta de GitHub: 6 de noviembre de 2023",
     ]),
     ("2024", "ESTRUCTURAS", "2024", [
         "Estructuras de datos, sockets y chat cliente-servidor en Java",
