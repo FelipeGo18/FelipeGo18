@@ -379,9 +379,9 @@ def notas():
 
 TRACKS = [
     ("AGROSENSE", "feat. NASA", "Space Apps 2026 con RealE4Life. Rotación de cultivos con datos satelitales.", "PYTHON · FASTAPI · REACT"),
-    ("LABOREMOTO", "feat. Raspberry Pi", "Laboratorio remoto para la Universidad Piloto. SSH, VNC e IA.", "RUST · TAURI"),
-    ("PEAJE FREE FLOW", "feat. NVIDIA Jetson", "Peaje sin barreras: YOLO y OCR de placas en el borde, RFID y MQTT a AWS IoT.", "PYTHON · .NET · IOT"),
-    ("MICROSERVICIOS", "feat. Kubernetes", "Lo que suena en CI2: backend en .NET con Keycloak, Kong y NATS.", ".NET · K8S"),
+    ("LABOREMOTO", "feat. Semillero de Investigación", "Laboratorio remoto para la Universidad Piloto. SSH, VNC e IA.", "RUST · TAURI"),
+    ("PEAJE FREE FLOW", "feat. Electiva de IoT", "Peaje sin barreras: YOLO y OCR de placas en el borde, RFID y MQTT a AWS IoT.", "PYTHON · .NET · IOT"),
+    ("MICROSERVICIOS", "feat. CI2", "Backend en .NET con Keycloak, Kong y NATS.", ".NET · K8S"),
 ]
 
 
