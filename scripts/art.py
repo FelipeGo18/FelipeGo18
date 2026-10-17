@@ -524,8 +524,10 @@ def arsenal():
 
 
 DISCOGRAFIA = [
-    ("2022", "EL INICIO", "2022 — 2023", [
+    ("2022", "EL INICIO", "2022", [
         "Empieza Ingeniería de Sistemas en la Universidad Piloto (2022-2)",
+    ]),
+    ("2023", "DEBUT", "2023", [
         "Abre su cuenta de GitHub: 6 de noviembre de 2023",
     ]),
     ("2024", "ESTRUCTURAS", "2024", [
@@ -551,10 +553,35 @@ DISCOGRAFIA = [
 ]
 
 
-def album_cover(x, y, s, year, vol, state):
-    """Portada de cada volumen: cuero, marco de plata y el año en cromo. state: pasado, actual o proximo."""
+def vinyl_disc(cx, cy, r, year, spinning, ghost=False):
+    """Vinilo con surcos, etiqueta roja con el año y un brillo fijo encima (el brillo no gira, el disco sí)."""
+    if ghost:
+        return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="none" stroke="#3a3a3a" stroke-width="2" stroke-dasharray="5 6"/>'
+                f'<circle cx="{cx}" cy="{cy}" r="{r * 0.34:.1f}" fill="none" stroke="#3a3a3a" stroke-dasharray="4 5"/>')
+    grooves = "".join(f'<circle cx="{cx}" cy="{cy}" r="{rr:.1f}" fill="none" stroke="#242424" stroke-width="1"/>'
+                      for rr in [r * k / 20 for k in range(9, 20)])
+    lr = r * 0.36
+    yr, wy = monob.path(year, 10, 0, 0, "#0a0a0a", tracking=1)
+    label = (f'<circle cx="{cx}" cy="{cy}" r="{lr:.1f}" fill="{RED}"/>'
+             f'<circle cx="{cx}" cy="{cy}" r="{lr * 0.82:.1f}" fill="none" stroke="#7f1520" stroke-width="1"/>'
+             f'<g transform="translate({cx - wy / 2:.1f} {cy - lr * 0.32:.1f})">{yr}</g>'
+             f'<circle cx="{cx}" cy="{cy}" r="3" fill="#0a0a0a"/>')
+    spin = (f'<animateTransform attributeName="transform" type="rotate" from="0 {cx} {cy}" to="360 {cx} {cy}" '
+            f'dur="3s" repeatCount="indefinite"/>') if spinning else ""
+    glare = (f'<path d="M{cx} {cy - r} A{r} {r} 0 0 1 {cx + r * 0.87:.1f} {cy - r * 0.5:.1f} L{cx} {cy} Z" fill="#fff" opacity="0.06"/>'
+             f'<path d="M{cx} {cy + r} A{r} {r} 0 0 1 {cx - r * 0.87:.1f} {cy + r * 0.5:.1f} L{cx} {cy} Z" fill="#fff" opacity="0.04"/>')
+    return (f'<circle cx="{cx + 3}" cy="{cy + 5}" r="{r}" fill="#000" opacity="0.6"/>'
+            f'<g>{spin}<circle cx="{cx}" cy="{cy}" r="{r}" fill="#0c0c0c" stroke="url(#chromeFrame)" stroke-width="1.5"/>'
+            f'{grooves}{label}</g>{glare}')
+
+
+def album_cover(x, y, s, year, vol, state, delay):
+    """Funda del volumen con su vinilo saliendo por la derecha. state: pasado, actual o proximo."""
+    r = s * 0.46
+    cx, cy = x + s - r * 0.15, y + s / 2
     out = []
     if state == "proximo":
+        out.append(vinyl_disc(cx, cy, r, year, False, ghost=True))
         out.append(f'<rect x="{x}" y="{y}" width="{s}" height="{s}" fill="#0f0f0f" stroke="#555" '
                    f'stroke-width="2" stroke-dasharray="6 6"/>')
         yr, wy = anton.path(year, 44, 0, 0, "#4a4a4a", tracking=1)
@@ -563,9 +590,16 @@ def album_cover(x, y, s, year, vol, state):
         out.append(f'<g transform="translate({x + (s - wt) / 2:.1f} {y + s - 14})"><animate attributeName="opacity" '
                    f'values="1;0.25;1" dur="2s" repeatCount="indefinite"/>{tag}</g>')
         return "".join(out)
+    # el disco arranca escondido en la funda y se desliza hacia afuera
+    slide = (f'<animateTransform attributeName="transform" type="translate" values="{-r * 0.85:.1f} 0;{-r * 0.85:.1f} 0;0 0" '
+             f'keyTimes="0;{delay / (delay + 0.9):.3f};1" dur="{delay + 0.9:.2f}s" fill="freeze" calcMode="spline" '
+             f'keySplines="0 0 1 1;0.2 0.8 0.2 1"/>')
+    out.append(f'<g>{slide}{vinyl_disc(cx, cy, r, year, state == "actual")}</g>')
     out.append(f'<rect x="{x + 4}" y="{y + 6}" width="{s}" height="{s}" fill="#000" opacity="0.6"/>')
     out.append(f'<rect x="{x}" y="{y}" width="{s}" height="{s}" fill="#141414" stroke="url(#chromeFrame)" stroke-width="2"/>')
     out.append(f'<rect x="{x + 6}" y="{y + 6}" width="{s - 12}" height="{s - 12}" fill="none" stroke="#2e2e2e"/>')
+    # borde de la boca de la funda, por donde sale el disco
+    out.append(f'<rect x="{x + s - 3}" y="{y + 10}" width="3" height="{s - 20}" fill="#000" opacity="0.5"/>')
     v, _ = monob.path(f"VOL. {vol:02d}", 10, x + 12, y + 22, RED, tracking=3)
     out.append(v)
     wy = anton.width(year, 46, 1)
@@ -582,13 +616,13 @@ def album_cover(x, y, s, year, vol, state):
 def discografia():
     x0, y_title = 70, 132
     cs, gap = 132, 44
-    tx = x0 + cs + 40
+    tx = x0 + cs + cs * 0.46 * 0.85 + 46  # deja espacio para el disco que sale de la funda
     y = 190
     rows = []
     last = len(DISCOGRAFIA) - 1
     for i, (year, name, span, tracks) in enumerate(DISCOGRAFIA):
         state = "proximo" if i == last else ("actual" if i == last - 1 else "pasado")
-        row = [album_cover(x0, y, cs, year, i + 1, state)]
+        row = [album_cover(x0, y, cs, year, i + 1, state, 0.3 + i * 0.18)]
         nm, wn = anton.path(name, 38, tx, y + 36, WHITE if state != "proximo" else "#7a7a7a", tracking=1)
         sp, _ = mono.path(span, 13, tx + wn + 18, y + 34, GRAY, tracking=2)
         row += [nm, sp]

@@ -2,7 +2,7 @@
 
 <img src="./assets/notas.svg" width="100%" alt="Estudio ingeniería de sistemas (9.º semestre) y trabajo como desarrollador backend en CI2. Construyo soluciones de punta a punta y conecto software con hardware: Jetson, Raspberry Pi, Arduino, visión en el borde, RTSP, MQTT y SSH." />
 
-<img src="./assets/discografia.svg" width="100%" alt="Discografía: 2022 inicio de Ingeniería de Sistemas en la Universidad Piloto; 6 de noviembre de 2023 cuenta de GitHub; 2024 Java y certificado de Patrones de Diseño; 2025 semillero de investigación, cliente SSH en Rust e informe del Laboratorio Remoto; 2026 Peaje Free Flow, backend en CI2, certificados de IoT y Gestión de Proyectos TIC, NASA Space Apps, tesis y paper; 2027 grado." />
+<img src="./assets/discografia.svg" width="100%" alt="Discografía: 2022 inicio de Ingeniería de Sistemas en la Universidad Piloto; 2023 debut en GitHub el 6 de noviembre; 2024 Java y certificado de Patrones de Diseño; 2025 semillero de investigación, cliente SSH en Rust e informe del Laboratorio Remoto; 2026 Peaje Free Flow, backend en CI2, certificados de IoT y Gestión de Proyectos TIC, NASA Space Apps, tesis y paper; 2027 grado." />
 
 <img src="./assets/tracklist.svg" width="100%" alt="Tracklist: AgroSense, LaboRemoto, Peaje Free Flow, Microservicios" />
 
